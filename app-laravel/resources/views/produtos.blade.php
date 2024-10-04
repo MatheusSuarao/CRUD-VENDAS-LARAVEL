@@ -116,31 +116,37 @@
   </table>
 
   <!-- Modal para edição do produto -->
-<div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
+  <div class="modal fade" id="editProductModal" tabindex="-1" aria-labelledby="editProductModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="editProductForm" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-              <label for="productName" class="form-label">Nome do Produto</label>
-              <input type="text" class="form-control" id="productName" name="nome" required>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editProductModalLabel">Editar Produto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-              <label for="productPrice" class="form-label">Preço</label>
-              <input type="text" class="form-control" id="productPrice" name="preco" required>
+            <div class="modal-body">
+                <form id="editProductForm" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Floating input para Nome do Produto -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="productName" name="nome" required>
+                        <label for="productName">Nome do Produto</label>
+                    </div>
+
+                    <!-- Floating input para Preço -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="productPrice" name="preco" required>
+                        <label for="productPrice">Preço</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

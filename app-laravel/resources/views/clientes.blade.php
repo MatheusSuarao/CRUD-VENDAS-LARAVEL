@@ -116,31 +116,37 @@
   </table>
 
   <!-- Modal para edição do produto -->
-<div class="modal fade" id="modaleditcliet" tabindex="-1" aria-labelledby="modaleditclietLabel" aria-hidden="true">
+  <div class="modal fade" id="modaleditcliet" tabindex="-1" aria-labelledby="modaleditclietLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modaleditclietLabel">Editar Cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <form id="clientEdit" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="mb-3">
-              <label for="clientNome" class="form-label">Nome do Cliente</label>
-              <input type="text" class="form-control" id="clientNome" name="nome" required>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modaleditclietLabel">Editar Cliente</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="mb-3">
-              <label for="clientEmail" class="form-label">Email</label>
-              <input type="email" class="form-control" id="clientEmail" name="email" required>
+            <div class="modal-body">
+                <form id="clientEdit" method="POST">
+                    @csrf
+                    @method('PUT')
+
+                    <!-- Floating input para Nome do Cliente -->
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="clientNome" name="nome" required>
+                        <label for="clientNome">Nome do Cliente</label>
+                    </div>
+
+                    <!-- Floating input para Email -->
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="clientEmail" name="email" required>
+                        <label for="clientEmail">Email</label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-primary">Salvar Alterações</button>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+</div>
+
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {

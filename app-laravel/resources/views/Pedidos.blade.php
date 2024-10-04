@@ -31,74 +31,79 @@
     <!-- Modal -->
     <div class="modal fade" id="pedidoModal" tabindex="-1" aria-labelledby="pedidoModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="pedidoModalLabel">Cadastrar Pedido</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            
-            <!-- Formulário de criação de pedido -->
-            <form action="{{ route('pedidos.cadastrar') }}" method="POST">
-              @csrf
-              <div class="modal-body">
-                
-                <!-- Seção do cliente -->
-
-
-                <div class="form-floating mb-3">
-                    <select class="form-select" name="id_cliente" id="floatingSelect" aria-label="Produto" required>
-                        @foreach($clientes as $cliente)
-                        <option value="{{ $cliente->id_cliente }}">{{ $cliente->nome }}</option>
-                      @endforeach
-                    </select>
-                    <label for="cliente" class="form-label">Cliente</label>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pedidoModalLabel">Cadastrar Pedido</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                
-                <!-- Seção para adicionar os itens do pedido -->
-                <div id="itens-pedido">
-                  <div class="item-pedido">
-                    <div class="row">
-                      <div class="col-md-5">
-                        <label for="produto" class="form-label">Produto</label>
-                        <select name="itens[0][id_produto]" class="form-control" required>
-                          @foreach($produtos as $produto)
-                            <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
-                          @endforeach
-                        </select>
-                      </div>
-      
-                      <div class="col-md-3">
-                        <label for="qtde" class="form-label">Quantidade</label>
-                        <input type="number" name="itens[0][qtde]" class="form-control" required>
-                      </div>
-      
-                      <div class="col-md-3">
-                        <label for="preco" class="form-label">Preço</label>
-                        <input type="text" name="itens[0][preco]" class="form-control" required>
-                      </div>
-      
-                      <div class="col-md-1 d-flex align-items-end">
-                        <button type="button" class="btn btn-danger btn-sm remove-item">X</button>
-                      </div>
+    
+                <!-- Formulário de criação de pedido -->
+                <form action="{{ route('pedidos.cadastrar') }}" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        
+                        <!-- Seção do cliente -->
+                        <div class="form-floating mb-3">
+                            <select class="form-select" name="id_cliente" id="floatingSelect" required>
+                                @foreach($clientes as $cliente)
+                                    <option value="{{ $cliente->id_cliente }}">{{ $cliente->nome }}</option>
+                                @endforeach
+                            </select>
+                            <label for="floatingSelect">Cliente</label>
+                        </div>
+    
+                        <!-- Seção para adicionar os itens do pedido -->
+                        <div id="itens-pedido">
+                            <div class="item-pedido">
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <div class="form-floating">
+                                            <select name="itens[0][id_produto]" class="form-select" required>
+                                                @foreach($produtos as $produto)
+                                                    <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
+                                                @endforeach
+                                            </select>
+                                            <label for="produto">Produto</label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-floating">
+                                            <input type="number" name="itens[0][qtde]" class="form-control" required>
+                                            <label for="qtde">Quantidade</label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-3">
+                                        <div class="form-floating">
+                                            <input type="text" name="itens[0][preco]" class="form-control" required>
+                                            <label for="preco">Preço</label>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-1 d-flex align-items-center">
+                                        <button type="button" class="btn btn-danger btn remove-item">X</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                        <!-- Botão para adicionar mais itens -->
+                        <div class="my-3">
+                            <button type="button" class="btn btn-success" id="add-item">Adicionar Item</button>
+                        </div>
+    
                     </div>
-                  </div>
-                </div>
-      
-                <!-- Botão para adicionar mais itens -->
-                <div class="my-3">
-                  <button type="button" class="btn btn-success" id="add-item">Adicionar Item</button>
-                </div>
-      
-              </div>
-              
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="submit" class="btn btn-primary">Salvar Pedido</button>
-              </div>
-            </form>
-          </div>
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Salvar Pedido</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
@@ -128,8 +133,8 @@
                                 <input type="text" name="itens[${itemIndex}][preco]" class="form-control" required>
                             </div>
 
-                            <div class="col-md-1 d-flex align-items-end">
-                                <button type="button" class="btn btn-danger btn-sm remove-item">X</button>
+                            <div class="col-md-1 d-flex align-items-center">
+                                <button type="button" class="btn btn-danger btn remove-item">X</button>
                             </div>
                         </div>
                     </div>`;
@@ -203,7 +208,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="modalEditPedido" tabindex="-1" aria-labelledby="modalEditPedidoLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="modalEditPedidoLabel">Editar Pedido</h5>
@@ -217,7 +222,6 @@
                     <!-- Floating input para o cliente do pedido -->
                     <div class="form-floating mb-3">
                         <select id="pedidoCliente" name="id_cliente" class="form-select" required>
-
                             @foreach ($clientes as $cliente)
                                 <option value="{{ $cliente->id_cliente }}">{{ $cliente->nome }}</option>
                             @endforeach
@@ -230,9 +234,10 @@
                         <!-- Aqui os itens do pedido serão carregados dinamicamente -->
                     </div>
 
+                    <!-- Botão para adicionar itens -->
                     <div class="my-3">
                         <button type="button" class="btn btn-success" id="add-item1">Adicionar Item</button>
-                      </div>
+                    </div>
 
                     <button type="submit" class="btn btn-primary">Salvar Alterações</button>
                 </form>
@@ -240,6 +245,7 @@
         </div>
     </div>
 </div>
+
 
 
 <script>
@@ -270,30 +276,37 @@
                         data.forEach((item, index) => {
                             const newItem = `
                                 <div class="item-pedido">
-                                    <div class="row">
+                                    <div class="row my-2">
                                         <div class="col-md-5">
-                                            <label for="produto" class="form-label">Produto</label>
-                                            <select name="itens[${index}][id_produto]" class="form-control" required>
-                                                <option value="${item.id_produto}" selected>${item.nome_produto}</option>
-                                                <!-- Aqui você pode adicionar outras opções de produtos se necessário -->
-                                            </select>
+                                            <div class="form-floating">
+                                                <select name="itens[${index}][id_produto]" class="form-select" required>
+                                                    <option value="${item.id_produto}" selected>${item.nome_produto}</option>
+                                                    <!-- Aqui você pode adicionar outras opções de produtos se necessário -->
+                                                </select>
+                                                <label for="produto">Produto</label>
+                                            </div>
                                         </div>
-                
+
                                         <div class="col-md-3">
-                                            <label for="qtde" class="form-label">Quantidade</label>
-                                            <input type="number" name="itens[${index}][qtde]" class="form-control" value="${item.qtde}" required>
+                                            <div class="form-floating">
+                                                <input type="number" name="itens[${index}][qtde]" class="form-control" value="${item.qtde}" required>
+                                                <label for="qtde">Quantidade</label>
+                                            </div>
                                         </div>
-                
+
                                         <div class="col-md-3">
-                                            <label for="preco" class="form-label">Preço</label>
-                                            <input type="text" name="itens[${index}][preco]" class="form-control" value="${item.preco}" required>
+                                            <div class="form-floating">
+                                                <input type="text" name="itens[${index}][preco]" class="form-control" value="${item.preco}" required>
+                                                <label for="preco">Preço</label>
+                                            </div>
                                         </div>
-                
-                                        <div class="col-md-1 d-flex align-items-end">
-                                            <button type="button" class="btn btn-danger btn-sm remove-item">X</button>
+
+                                        <div class="col-md-1 d-flex align-items-center">
+                                            <button type="button" class="btn btn-danger btn remove-item">X</button>
                                         </div>
                                     </div>
                                 </div>
+
                             `;
 
                             itensContainer.insertAdjacentHTML('beforeend', newItem);
@@ -319,29 +332,36 @@
                     <div class="item-pedido">
                         <div class="row">
                             <div class="col-md-5">
-                                <label for="produto" class="form-label">Produto</label>
-                                <select name="itens[${itemIndex}][id_produto]" class="form-control" required>
-                                    @foreach($produtos as $produto)
-                                        <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
-                                    @endforeach
-                                </select>
+                                <div class="form-floating">
+                                    <select name="itens[${itemIndex}][id_produto]" class="form-select" required>
+                                        @foreach($produtos as $produto)
+                                            <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="produto">Produto</label>
+                                </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label for="qtde" class="form-label">Quantidade</label>
-                                <input type="number" name="itens[${itemIndex}][qtde]" class="form-control" required>
+                                <div class="form-floating">
+                                    <input type="number" name="itens[${itemIndex}][qtde]" class="form-control" required>
+                                    <label for="qtde">Quantidade</label>
+                                </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label for="preco" class="form-label">Preço</label>
-                                <input type="text" name="itens[${itemIndex}][preco]" class="form-control" required>
+                                <div class="form-floating">
+                                    <input type="text" name="itens[${itemIndex}][preco]" class="form-control" required>
+                                    <label for="preco">Preço</label>
+                                </div>
                             </div>
 
-                            <div class="col-md-1 d-flex align-items-end">
-                                <button type="button" class="btn btn-danger btn-sm remove-item">X</button>
+                            <div class="col-md-1 d-flex align-items-center">
+                                <button type="button" class="btn btn-danger btn remove-item">X</button>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    `;
 
                 document.getElementById('itens-pedido1').insertAdjacentHTML('beforeend', newItem);
                 itemIndex++;
