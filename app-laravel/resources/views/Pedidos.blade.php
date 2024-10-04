@@ -114,30 +114,37 @@
                 const newItem = `
                     <div class="item-pedido">
                         <div class="row">
-                            <div class="col-md-5">
-                                <label for="produto" class="form-label">Produto</label>
-                                <select name="itens[${itemIndex}][id_produto]" class="form-control" required>
-                                    @foreach($produtos as $produto)
-                                        <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
-                                    @endforeach
-                                </select>
+                            <div class="col-md-5 my">
+                                <div class="form-floating">
+                                    <select name="itens[${itemIndex}][id_produto]" class="form-select" required>
+                                        @foreach($produtos as $produto)
+                                            <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="produto">Produto</label>
+                                </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label for="qtde" class="form-label">Quantidade</label>
-                                <input type="number" name="itens[${itemIndex}][qtde]" class="form-control" required>
+                                <div class="form-floating">
+                                    <input type="number" name="itens[${itemIndex}][qtde]" class="form-control" required>
+                                    <label for="qtde">Quantidade</label>
+                                </div>
                             </div>
 
                             <div class="col-md-3">
-                                <label for="preco" class="form-label">Preço</label>
-                                <input type="text" name="itens[${itemIndex}][preco]" class="form-control" required>
+                                <div class="form-floating">
+                                    <input type="text" name="itens[${itemIndex}][preco]" class="form-control" required>
+                                    <label for="preco">Preço</label>
+                                </div>
                             </div>
 
                             <div class="col-md-1 d-flex align-items-center">
-                                <button type="button" class="btn btn-danger btn remove-item">X</button>
+                                <button type="button" class="btn btn-danger btn-sm remove-item">X</button>
                             </div>
                         </div>
-                    </div>`;
+                    </div>
+                    `;
 
                 document.getElementById('itens-pedido').insertAdjacentHTML('beforeend', newItem);
                 itemIndex++;
@@ -281,7 +288,9 @@
                                             <div class="form-floating">
                                                 <select name="itens[${index}][id_produto]" class="form-select" required>
                                                     <option value="${item.id_produto}" selected>${item.nome_produto}</option>
-                                                    <!-- Aqui você pode adicionar outras opções de produtos se necessário -->
+                                                        @foreach($produtos as $produto)
+                                                            <option value="{{ $produto->id_produto }}">{{ $produto->nome }}</option>
+                                                        @endforeach
                                                 </select>
                                                 <label for="produto">Produto</label>
                                             </div>
