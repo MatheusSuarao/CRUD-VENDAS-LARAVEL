@@ -6,6 +6,11 @@ Clone Repositório
 git clone https://github.com/MatheusSuarao/CRUD-VENDAS-LARAVEL.git
 ```
 
+Entre na pasta app-laravel
+```sh
+cd app-laravel
+```
+
 Crie o Arquivo .env
 ```sh
 cp .env.example .env
